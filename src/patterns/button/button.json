@@ -1,0 +1,10 @@
+{
+  "title": "Button",
+  "text": "A button",
+  "variants": {
+    "secondary": {
+      "title": "Button Secondary",
+      "text": "Secondary button"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+---
+title: 'Preview' 
+pagination:
+  data: collections.patterns
+  size: 1
+  addAllPagesToCollections: true
+  alias: item
+permalink: '{{ item.filePathStem }}/index.html'
+---
+
+{% extends "layouts/base.njk" %} 
+
+{% set variants = patterns.getVariants(item, collections.patterns) %}
+
+{% block content %}
+<div class="wrapper flow">
+  <iframe src="/preview/{{ item.fileSlug | slug }}"></iframe>
+  
+  {% if variants %}
+    <h2>Variants</h2>
+    <ul>
+    {% for variant in variants %}
+      <li>
+        <a href="{{ variant.filePathStem }}">{{ variant.data.title }}</a>
+      </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+</div>
+{% endblock %}
