@@ -1,0 +1,16 @@
+.side-nav {
+  border-top: 1px solid;
+  padding: 0;
+
+  a {
+    display: block;
+    padding: get-size('300') get-size('500');
+    background: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  li {
+    border-bottom: 1px solid;
+  }
+}

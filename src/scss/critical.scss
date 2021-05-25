@@ -48,6 +48,10 @@ dl {
   grid-gap: 0.5rem 1.5rem;
 }
 
+iframe {
+  border: 1px solid;
+}
+
 // High contrast selection because it can help visually-impaired
 // folks read the text easier
 ::selection {
@@ -59,8 +63,10 @@ dl {
 }
 
 // Import blocks
+@import 'blocks/side-nav';
 
 // Import utilities
 @import 'utilities/flow';
+@import 'utilities/sidebar';
 @import 'utilities/visually-hidden';
 @import 'utilities/wrapper';

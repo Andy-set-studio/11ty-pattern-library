@@ -1,0 +1,22 @@
+.sidebar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: get-size('500');
+  min-height: 100vh;
+}
+
+.sidebar > * {
+  flex-basis: 10rem;
+  flex-grow: 1;
+  padding: get-size('700') 0;
+}
+
+.sidebar > :last-child {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-width: calc(50% - #{get-size('500')});
+}
+
+.sidebar > :first-child {
+  outline: 1px solid get-color('dark');
+}

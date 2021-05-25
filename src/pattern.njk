@@ -14,7 +14,11 @@ permalink: '{{ item.filePathStem }}/index.html'
 
 {% block content %}
 <div class="wrapper flow">
-  <iframe src="/preview/{{ item.fileSlug | slug }}"></iframe>
+  <h1>{{ item.data.title }}</h1>
+  <iframe src="/preview/{{ item.fileSlug }}"></iframe>
+  <div>
+    <a href="/preview/{{ item.fileSlug }}">View full screen</a>
+  </div>
   
   {% if variants %}
     <h2>Variants</h2>

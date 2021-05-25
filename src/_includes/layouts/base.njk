@@ -31,7 +31,7 @@
     
     <div class="sidebar">
       <nav aria-label="Patterns">
-        <ul>
+        <ul class="side-nav" role="list">
           {% for item in patterns.navItems(collections.patterns) %}
             <li>
               <a href="{{ item.filePathStem }}">{{ item.data.title }}</a>
@@ -39,9 +39,9 @@
           {% endfor %}
         </ul>
       </nav>
+      <main tabindex="-1" id="main-content">
+        {% block content %}{% endblock %}
+      </main>
     </div>
-    <main tabindex="-1" id="main-content">
-      {% block content %}{% endblock %}
-    </main>
   </body>
 </html>
