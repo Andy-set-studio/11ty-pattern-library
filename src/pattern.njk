@@ -19,6 +19,10 @@ permalink: '{{ item.filePathStem }}/index.html'
   <div>
     <a href="/preview/{{ item.fileSlug }}">View full screen</a>
   </div>
+  <h2>Source (Nunjucks)</h2>
+  <pre class="code-sample"><code>{{ patterns.renderSource(item) }}</code></pre>
+  <h2>Output</h2>
+  <pre class="code-sample"><code>{{ patterns.render(item) }}</code></pre>
   
   {% if variants | length %}
     <h2>Variants</h2>

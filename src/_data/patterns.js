@@ -26,5 +26,13 @@ module.exports = {
     );
 
     return nunjucks.renderString(markup, {data: item.data});
+  },
+  renderSource(item) {
+    const markup = fs.readFileSync(
+      `${__basedir}${item.inputPath.replace('./', '/')}`,
+      'utf8'
+    );
+
+    return markup;
   }
 };
