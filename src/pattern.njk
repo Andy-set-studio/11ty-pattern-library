@@ -11,6 +11,7 @@ permalink: '{{ item.filePathStem }}/index.html'
 {% extends "layouts/base.njk" %} 
 
 {% set variants = patterns.getVariants(item, collections.patterns) %}
+{% set docs = patterns.getDocs(item) %}
 
 {% block content %}
 <div class="wrapper flow">
@@ -33,6 +34,13 @@ permalink: '{{ item.filePathStem }}/index.html'
       </li>
     {% endfor %}
     </ul>
+  {% endif %}
+
+  {% if docs %}
+    <article class="flow">
+      <h2>Docs</h2>
+      {{ docs | markdownFilter | safe }}
+    </article>
   {% endif %}
 </div>
 {% endblock %}

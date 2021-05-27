@@ -34,5 +34,16 @@ module.exports = {
     );
 
     return markup;
+  },
+  getDocs(item) {
+    const docsPath = `${__basedir}/src/${item.template.fileSlug.dirs.join('/')}/docs.md`;
+
+    if (!fs.existsSync(docsPath)) {
+      return null;
+    }
+
+    const docsContent = fs.readFileSync(docsPath, 'utf8');
+
+    return docsContent;
   }
 };
