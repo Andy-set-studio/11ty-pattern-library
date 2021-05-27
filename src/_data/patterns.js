@@ -7,22 +7,25 @@ module.exports = {
     return collection.filter(x => !x.inputPath.includes('variants'));
   },
   getVariants(item, collection) {
+    // If the item itself is a variant, return early.
+    if (item.filePathStem.includes('variants')) {
+      return;
+    }
+
     const basePath = item.filePathStem
       .split('/')
-      .filter(x => x.length)
-      .slice(0, 2)
+      .slice(0, 3)
       .join('/');
 
     return collection.filter(
       x =>
-        x.filePathStem.indexOf(`/${basePath}`) === 0 &&
+        x.filePathStem.indexOf(basePath) === 0 &&
         x.filePathStem.includes('variants')
     );
   },
   render(item) {
-    console.log(item);
     const markup = fs.readFileSync(
-      `${__basedir}${item.inputPath.replace('./', '/')}`,
+      path.resolve(__basedir, item.inputPath),
       'utf8'
     );
 
@@ -30,14 +33,14 @@ module.exports = {
   },
   renderSource(item) {
     const markup = fs.readFileSync(
-      `${__basedir}${item.inputPath.replace('./', '/')}`,
+      path.resolve(__basedir, item.inputPath),
       'utf8'
     );
 
     return markup;
   },
   getDocs(item) {
-    const docsPath = `${__basedir}/src/${item.template.fileSlug.dirs.join('/')}/docs.md`;
+    const docsPath = path.join(__basedir, path.dirname(item.inputPath), 'docs.md');
 
     if (!fs.existsSync(docsPath)) {
       return null;
