@@ -1,0 +1,14 @@
+{% extends "layouts/base.njk" %} 
+{% set title = 'Typography' %}
+
+{% block content %}
+
+<div class="wrapper flow">
+  <h1>{{ title }}</h1>
+  <h2>Font sizes</h2>
+  {% for item in tokens.sizes %}
+    <p class="text-{{ item.key }}">Size item: {{ item.value }}</p>
+  {% endfor %}
+</div>
+
+{% endblock %}

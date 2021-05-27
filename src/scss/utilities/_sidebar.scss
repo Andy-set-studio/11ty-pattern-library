@@ -11,10 +11,6 @@
   padding: get-size('700') 0;
 }
 
-.sidebar h2 {
-  padding-inline-start: get-size('500');
-}
-
 .sidebar > :last-child {
   flex-basis: 0;
   flex-grow: 999;
@@ -23,4 +19,13 @@
 
 .sidebar > :first-child {
   outline: 1px solid get-color('dark');
+}
+
+.sidebar > :first-child h2 {
+  --flow-space: 2rem;
+  padding-inline-start: get-size('500');
+}
+
+.sidebar > :first-child h2 + * {
+  --flow-space: 0.5rem;
 }
