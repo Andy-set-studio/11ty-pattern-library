@@ -25,22 +25,28 @@ permalink: '{{ item.filePathStem }}/index.html'
   <h2>Output</h2>
   <pre class="code-sample"><code>{{ patterns.render(item) }}</code></pre>
   
-  {% if variants | length %}
-    <h2>Variants</h2>
-    <ul>
-    {% for variant in variants %}
-      <li>
-        <a href="{{ variant.filePathStem }}">{{ variant.data.title }}</a>
-      </li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-
   {% if docs %}
     <article class="flow">
       <h2>Docs</h2>
       {{ docs | markdownFilter | safe }}
     </article>
   {% endif %}
+
+  {% if variants | length %}
+    <h2>Variants</h2>
+    {% for variant in variants %}
+      <article class="flow">
+        <iframe src="/preview/{{ variant.fileSlug }}"></iframe>
+        <div>
+          <a href="/preview/{{ variant.fileSlug }}">View full screen</a>
+        </div>
+        <h2>Source (Nunjucks)</h2>
+        <pre class="code-sample"><code>{{ patterns.renderSource(variant) }}</code></pre>
+        <h2>Output</h2>
+        <pre class="code-sample"><code>{{ patterns.render(variant) }}</code></pre>
+      </article>
+    {% endfor %}
+  {% endif %}
+
 </div>
 {% endblock %}

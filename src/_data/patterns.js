@@ -20,6 +20,7 @@ module.exports = {
     );
   },
   render(item) {
+    console.log(item);
     const markup = fs.readFileSync(
       `${__basedir}${item.inputPath.replace('./', '/')}`,
       'utf8'

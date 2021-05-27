@@ -32,6 +32,15 @@
     <div class="sidebar">
       <nav aria-label="Patterns">
         <ul class="side-nav" role="list">
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/colors">Colors</a>
+          </li>
+        </ul>
+        <h2>Patterns</h2>
+        <ul class="side-nav" role="list">
           {% for item in patterns.navItems(collections.patterns) %}
             <li>
               <a href="{{ item.filePathStem }}">{{ item.data.title }}</a>

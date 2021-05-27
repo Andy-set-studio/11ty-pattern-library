@@ -65,8 +65,10 @@ iframe {
 // Import blocks
 @import 'blocks/code-sample';
 @import 'blocks/side-nav';
+@import 'blocks/swatch';
 
 // Import utilities
+@import 'utilities/auto-grid';
 @import 'utilities/flow';
 @import 'utilities/sidebar';
 @import 'utilities/visually-hidden';

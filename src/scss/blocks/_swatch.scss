@@ -1,0 +1,17 @@
+.swatch {
+  background: white;
+  border: 1px solid;
+
+  > * {
+    padding: 1rem;
+  }
+
+  &__sample {
+    aspect-ratio: 16/9;
+  }
+
+  h2,
+  h3 {
+    text-transform: capitalize;
+  }
+}

@@ -1,0 +1,28 @@
+{% extends "layouts/base.njk" %} 
+{% set title = 'Colors' %}
+
+{% block content %}
+
+<div class="wrapper flow">
+  <h1>{{ title }}</h1>
+  <ul class="auto-grid" role="list">
+    {% for item in tokens.colors %}
+      <li class="swatch">
+        <div class="swatch__sample" style="background: {{ item.value }}" aria-hidden="true"></div>
+        <div class="flow">
+          <h2>{{ item.name }}</h2>
+          <dl>
+            <dt>Value</dt>
+            <dd><code>{{ item.value }}</code></dd>
+            <dt>Custom Property</dt>
+            <dd><code>{{ item.customProp }}</code></dd>
+            <dt>Sass</dt>
+            <dd><code>{{ item.sass }}</code></dd>
+          </dl>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}
