@@ -17,13 +17,44 @@ permalink: '/preview/{{ item.fileSlug | slug }}/index.html'
   <link rel="stylesheet" href="https://codepen.io/web-dot-dev/pen/abpoXGZ.css" />
   <title>{{ item.data.title }} - Preview</title>
   <style>
+    :root {
+      --color-bg: #ffffff;
+      --color-text: #121111;
+      --color-text-rev: #ffffff;
+      --color-primary: #3740ff;
+      --color-action-bg: var(--color-primary);
+    }
+
+    .button {
+      color: var(--color-text-rev);
+      background: var(--color-action-bg);
+    }
+
     body {
       display: block;
       padding: 0;
+      background: var(--color-bg);
+      color: var(--color-text);
     }
 
     .preview {
       padding: 1em;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-bg: #121111;
+        --color-text: #f3f3f3;
+        --color-action-bg: #e8f0fe;
+        --color-text-rev: #272eb5;
+      }
+    }
+
+    [data-user-color-scheme="dark"] {
+      --color-bg: #121111;
+      --color-text: #f3f3f3;
+      --color-action-bg: #e8f0fe;
+      --color-text-rev: #272eb5;
     }
   </style>
 </head>
@@ -31,5 +62,70 @@ permalink: '/preview/{{ item.fileSlug | slug }}/index.html'
   <div class="preview">
     {{ patterns.render(item) | safe }}
   </div>
+  <script>
+    const STORAGE_KEY = 'user-color-scheme';
+    const COLOR_MODE_KEY = '--color-mode';
+
+    /**
+     * Pass in a custom prop key and this function will return its
+     * computed value. 
+     * A reduced version of this: https://andy-bell.design/wrote/get-css-custom-property-value-with-javascript/
+     */
+    const getCSSCustomProp = (propKey) => {
+      let response = getComputedStyle(document.documentElement).getPropertyValue(propKey);
+
+      // Tidy up the string if there’s something to work with
+      if (response.length) {
+        response = response.replace(/\'|"/g, '').trim();
+      }
+
+      // Return the string response by default
+      return response;
+    };
+
+    /**
+     * Takes either a passed settings ('light'|'dark') or grabs that from localStorage.
+     * If it can’t find the setting in either, it tries to load the CSS color mode,
+     * controlled by the media query
+     */
+    const applySetting = passedSetting => {
+      let currentSetting = passedSetting || localStorage.getItem(STORAGE_KEY);
+      
+      if(currentSetting) {
+        document.documentElement.setAttribute('data-user-color-scheme', currentSetting);
+      }
+    }
+
+    /**
+     * Get’s the current setting > reverses it > stores it
+     */
+    const toggleSetting = () => {
+      let currentSetting = localStorage.getItem(STORAGE_KEY);
+      
+      switch(currentSetting) {
+        case null:
+          currentSetting = getCSSCustomProp(COLOR_MODE_KEY) === 'dark' ? 'light' : 'dark';
+          break;
+        case 'light':
+          currentSetting = 'dark';
+          break;
+        case 'dark':
+          currentSetting = 'light';
+          break;
+      }
+
+      localStorage.setItem(STORAGE_KEY, currentSetting);
+      
+      return currentSetting;
+    }
+
+    applySetting();
+
+    window.addEventListener('message', evt => {
+      if(evt.data === 'toggle_theme') {
+        applySetting(toggleSetting());
+      }
+    });
+  </script>
 </body>
 </html>

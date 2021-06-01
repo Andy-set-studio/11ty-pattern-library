@@ -16,10 +16,20 @@ permalink: '{{ item.filePathStem }}/index.html'
 {% block content %}
 <div class="wrapper flow">
   <h1>{{ item.data.title }}</h1>
-  <iframe src="/preview/{{ item.fileSlug }}"></iframe>
+  {% set frameId = global.random() %}
+  <iframe id="{{ frameId }}" src="/preview/{{ item.fileSlug }}"></iframe>
   <div>
+    <button data-target="{{ frameId }}">Toggle dark mode</button>
     <a href="/preview/{{ item.fileSlug }}">View full screen</a>
   </div>
+  <script>
+    const button = document.querySelector('[data-target]');
+    const target = document.getElementById(button.getAttribute('data-target')).contentWindow;
+
+    button.addEventListener('click', evt => {
+      target.postMessage('toggle_theme');
+    });
+  </script>
   <h2>Source (Nunjucks)</h2>
   <pre class="code-sample"><code>{{ patterns.renderSource(item) }}</code></pre>
   <h2>Output</h2>
