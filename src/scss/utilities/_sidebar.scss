@@ -19,6 +19,7 @@
 
 .sidebar > :first-child {
   outline: 1px solid get-color('dark');
+  max-width: 20rem;
 }
 
 .sidebar > :first-child h2 {

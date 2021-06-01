@@ -50,6 +50,11 @@ dl {
 
 iframe {
   border: 1px solid;
+  resize: both;
+  width: var(--frame-width, auto);
+  height: var(--frame-height, auto);
+  min-width: 300px;
+  min-height: 150px;
 }
 
 // High contrast selection because it can help visually-impaired
